@@ -93,6 +93,7 @@ class MyHomePage extends StatelessWidget {
                   style: TextStyle(
                     color: Colors.grey[400],
                     letterSpacing: 1.0,
+                    fontSize: 18.0,
                   ),
                 ),
               ],
