@@ -27,6 +27,17 @@ class MyHomePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            Center(
+              child: CircleAvatar(
+                backgroundImage: NetworkImage(
+                    "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg"),
+                radius: 40.0,
+              ),
+            ),
+            Divider(
+              height: 30.0,
+              color: Colors.grey[400],
+            ),
             Text(
               'NAME: ',
               style: TextStyle(
