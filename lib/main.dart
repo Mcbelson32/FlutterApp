@@ -1,11 +1,24 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() => runApp(MaterialApp(
-      home: MyHomePage(title: "home page"),
+      home: ChangeNotifierProvider(
+        create: (context) => MyProvider(),
+        child: MyHomePage(title: "home page"),
+      ),
       debugShowCheckedModeBanner: false,
     ));
+
+class MyProvider with ChangeNotifier {
+  int mcLvl = 0;
+
+  void increment() {
+    mcLvl++;
+    notifyListeners();
+  }
+}
 
 class MyHomePage extends StatelessWidget {
   final String title;
@@ -13,6 +26,7 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var myProvider = Provider.of<MyProvider>(context);
     return Scaffold(
       backgroundColor: Colors.grey[900],
       appBar: AppBar(
@@ -21,6 +35,14 @@ class MyHomePage extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.grey[850],
         elevation: 0.0,
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          myProvider.increment();
+        },
+        backgroundColor: Colors.grey[800],
+        tooltip: "add Level",
+        child: Icon(Icons.add),
       ),
       body: Padding(
         padding: EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0.0),
@@ -35,7 +57,8 @@ class MyHomePage extends StatelessWidget {
               ),
             ),
             Divider(
-              height: 30.0,
+              height: 50.0,
+              // thickness: 0.9,
               color: Colors.grey[400],
             ),
             Text(
@@ -52,7 +75,7 @@ class MyHomePage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: 10.0),
               child: Text(
-                'Mcbel',
+                'Makbel',
                 style: TextStyle(
                   color: Colors.amberAccent[200],
                   letterSpacing: 2.0,
@@ -78,7 +101,7 @@ class MyHomePage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: 10.0),
               child: Text(
-                '8',
+                "${myProvider.mcLvl}",
                 style: TextStyle(
                   color: Colors.amberAccent[200],
                   letterSpacing: 2.0,
